@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OAE || School WhatsApp Groups & Channels</title>
+  <meta name="viewport" content="width=device-width, initial-scale=122.0">
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+    .section-heading {
+      width: 100vw;
+      margin: 30px 0 10px 0;
+      text-align: center;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      transform: translateX(-50%);
+      padding: 0;
+    }
+    .section-heading h2 {
+      background: linear-gradient(90deg, #008000 0%, #fff 50%, #FF9800 100%);
+      color: #fff;
+      background-size: 200% 200%;
+      background-position: left;
+      transition: background-position 2s, color 2s;
+      width: 100vw;
+      margin: 0;
+      border-radius: 0;
+      padding: 15px 0;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .section-heading h2:hover {
+      background-position: right;
+      color: #fff;
+    }
+    .main-heading h2 {
+      background: #008000;
+      color: #fff;
+      border: 3px solid #fff;
+      transition: background-position 2s, color 2s;
+      width: 100vw;
+      margin: 0;
+      border-radius: 0;
+      padding: 15px 0;
+      box-sizing: border-box;
+      text-align: center;
+    }
+    .main-heading h2:hover {
+      background: linear-gradient(90deg, #FF0000, #FF9800, #FFFF00, #00FF00, #00BFFF, #8A2BE2, #FF1493);
+      background-size: 200% 200%;
+      background-position: right;
+      color: #fff;
+    }
+    .school-heading h2 {
+      background: #008000;
+      color: #fff;
+      border: 3px solid #fff;
+      width: 100vw;
+      margin: 0;
+      border-radius: 0;
+      padding: 15px 0;
+      box-sizing: border-box;
+      transition: background-position 2s, color 2s;
+      background-size: 200% 200%;
+      background-position: left;
+      text-align: center;
+    }
+    .school-heading h2:hover {
+      background: linear-gradient(90deg, #FF0000, #FF9800, #FFFF00, #00FF00, #00BFFF, #8A2BE2, #FF1493);
+      background-size: 200% 200%;
+      background-position: right;
+      color: #fff;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background: white;
+      color: #000;
+      margin: 0;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+    h1 {
+      background: #008000;
+      color: #fff;
+      padding: 15px 0;
+      text-align: center;
+      font-size: 22px;
+      text-transform: uppercase;
+      border-radius: 0;
+      box-shadow: 0 2px 8px rgba(0,128,0,0.10);
+      transition: background-position 2s, color 2s;
+      width: 100vw;
+      margin: 0;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      transform: translateX(-50%);
+      box-sizing: border-box;
+    }
+    h1:hover {
+      background: linear-gradient(90deg, #FF0000, #FF9800, #FFFF00, #00FF00, #00BFFF, #8A2BE2, #FF1493);
+      background-size: 200% 200%;
+      background-position: right;
+      color: #fff;
+    }
+    .school-box {
+      border: 2px solid #008000;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 15px 0;
+      background-color: #fff;
+      transition: box-shadow 0.2s, background 0.2s, border-color 0.2s;
+      cursor: pointer;
+      box-sizing: border-box;
+      overflow: hidden;
+      box-shadow: 0 2px 12px rgba(0,128,0,0.07);
+    }
+    .school-box.collapsed .links,
+    .school-box.collapsed .note {
+      display: none;
+    }
+    .school-box:hover {
+      box-shadow: 0 4px 16px rgba(255,152,0,0.18);
+      background: #fffbe6;
+      border-color: #FF9800;
+    }
+    .school-box h3 {
+      margin: 0 0 10px 0;
+      color: #008000;
+      font-size: 18px;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.2s;
+      text-align: center;
+      box-shadow: 0 1px 6px rgba(255,69,0,0.08);
+      border-radius: 6px;
+    }
+    .school-box h3:hover {
+      /* Remove multicolor text effect */
+      color: #FF9800;
+      text-decoration: underline;
+      transition: color 2s;
+      box-shadow: 0 2px 12px rgba(255,69,0,0.18);
+    }
+    .links {
+      transition: max-height 0.3s;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .links a {
+      display: inline-block;
+      margin-right: 10px;
+      margin-top: 5px;
+      padding: 8px 12px;
+      background-color: #008000;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 2s, color 2s, border-color 2s;
+      border: 2px solid transparent;
+      position: relative;
+    }
+    .links a:hover {
+      background-color: #FF9800;
+      color: #fff;
+      border-color: #FF9800;
+      transition: background 2s, color 2s, border-color 2s;
+    }
+    .links a::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      left: 50%;
+      bottom: 120%;
+      transform: translateX(-50%);
+      background: #FF9800;
+      color: #fff;
+      padding: 4px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      z-index: 10;
+    }
+    .links a:hover::after {
+      opacity: 1;
+    }
+    .note {
+      background-color: #fffbe6;
+      border-left: 5px solid #FF9800;
+      padding: 10px;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #FF9800;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    /* Add short details for each school */
+    .school-box .school-detail {
+      font-size: 13px;
+      color: #555;
+      margin-bottom: 8px;
+      font-style: italic;
+    }
+    @media (max-width: 500px) {
+      body {
+        padding: 0 2vw;
+      }
+      h1 {
+        font-size: 18px;
+        padding: 10px 0;
+        margin: 0;
+        width: 100vw;
+        left: 50%;
+        right: 50%;
+        transform: translateX(-50%);
+      }
+      .section-heading {
+        margin: 20px 0 8px 0;
+        padding: 0;
+        width: 100vw;
+        left: 50%;
+        right: 50%;
+        transform: translateX(-50%);
+      }
+      .section-heading h2,
+      .main-heading h2,
+      .school-heading h2 {
+        padding: 10px 0;
+        font-size: 18px;
+        width: 100vw;
+        margin: 0;
+        border-radius: 0;
+        box-sizing: border-box;
+      }
+      .school-box {
+        padding: 10px 2vw;
+        margin: 10px 0;
+      }
+      .school-box h3 {
+        font-size: 16px;
+      }
+      .links a {
+        font-size: 13px;
+        padding: 7px 10px;
+      }
+    }
+    @media (min-width: 700px) {
+      body {
+        padding: 0 15vw;
+      }
+      h1 {
+        font-size: 28px;
+        padding: 15px 0;
+        width: 100vw;
+        left: 50%;
+        right: 50%;
+        transform: translateX(-50%);
+      }
+      .section-heading {
+        margin: 30px 0 10px 0;
+        padding: 0;
+        width: 100vw;
+        left: 50%;
+        right: 50%;
+        transform: translateX(-50%);
+      }
+      .section-heading h2,
+      .main-heading h2,
+      .school-heading h2 {
+        padding: 15px 0;
+        font-size: 24px;
+        width: 100vw;
+        margin: 0;
+        border-radius: 0;
+        box-sizing: border-box;
+      }
+      .school-box {
+        padding: 20px;
+        margin: 20px 0;
+      }
+      .school-box h3 {
+        font-size: 22px;
+      }
+      .links a {
+        font-size: 16px;
+      }
+    }
+  </style>
+</style>
+<script>
+// Collapsible school boxes
+document.addEventListener('DOMContentLoaded', function() {
+  var boxes = document.querySelectorAll('.school-box');
+  boxes.forEach(function(box) {
+    var header = box.querySelector('h3');
+    if(header) {
+      header.addEventListener('click', function(e) {
+        // Only collapse/expand if not a link click
+        if(e.target.tagName.toLowerCase() === 'a') return;
+        box.classList.toggle('collapsed');
+      });
+    }
+  });
+
+  // Live search for all boxes
+  var searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', function() {
+    var val = searchInput.value.toLowerCase();
+    boxes.forEach(function(box) {
+      var text = box.textContent.toLowerCase();
+      if(text.indexOf(val) !== -1) {
+        box.style.display = '';
+      } else {
+        box.style.display = 'none';
+      }
+    });
+  });
+
+  // Center single link in .links
+  var linkBoxes = document.querySelectorAll('.links');
+  linkBoxes.forEach(function(links) {
+    if (links.querySelectorAll('a').length === 1) {
+      links.classList.add('single-link');
+    }
+  });
+  // Back to Top button logic
+  var backToTopBtn = document.getElementById('backToTop');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 300) {
+      backToTopBtn.style.display = 'block';
+    } else {
+      backToTopBtn.style.display = 'none';
+    }
+  });
+  backToTopBtn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // About OAE toggle logic
+  var aboutBtn = document.getElementById('aboutOaeToggle');
+  var aboutCard = document.getElementById('aboutOaeCard');
+  aboutBtn.addEventListener('click', function() {
+    if (aboutCard.style.maxHeight === '0px' || aboutCard.style.maxHeight === '' || aboutCard.style.maxHeight === '0') {
+      aboutCard.style.maxHeight = aboutCard.scrollHeight + 'px';
+    } else {
+      aboutCard.style.maxHeight = '0';
+    }
+  });
+});
+</script>
+</head>
+<body>
+
+
+  <h1>📢 OAE OFFICIAL GROUPS & CHANNELS</h1>
+
+  <div class="search-about-row" style="display:flex;align-items:center;justify-content:center;gap:16px;margin:25px auto 30px auto;max-width:420px;">
+    <input type="text" id="searchInput" placeholder="Search for any group or channel..." style="flex:1;width:100%;max-width:400px;padding:10px;font-size:16px;border:2px solid #008000;border-radius:8px;display:block;background:#fff;">
+    <button id="aboutOaeToggle" class="about-oae-toggle" style="padding:10px 18px;font-size:15px;background:#008000;color:#fff;border:none;border-radius:8px;cursor:pointer;box-shadow:0 2px 8px rgba(0,128,0,0.10);transition:background 0.3s;white-space:nowrap;">About OAE</button>
+  </div>
+  <div class="about-oae-card" id="aboutOaeCard" style="max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(.4,0,.2,1);margin-bottom:0;">
+    <div class="section-heading">
+      <h2>About OAE (Oluwatosin Academy of Excellence)</h2>
+    </div>
+    <div class="about-oae-content">
+      <p><strong>OAE — Oluwatosin Academy of Excellence</strong> is a dynamic educational and media brand founded by <a href="https://wa.me/message/ICCLO6DMU3EGH1" target="_blank" style="color:#008000;font-weight:bold;text-decoration:none;">Mr. Tee</a>, dedicated to empowering learners, inspiring minds, and bridging the gap between classroom learning and real-world application.</p>
+      <p>We provide academic news and resources for WAEC, NECO, JAMB, and Post-UTME, and are compiling past questions, likely exam topics, and detailed explanations to help students prepare confidently. Our free tutorials cover core subjects and modern skills like coding, AI, and Web3, with ongoing plans for expansion.</p>
+      <p>Through <a href="https://whatsapp.com/channel/0029VaiCEq1AjPXRzzB34H25" target="_blank" style="color:#008000;font-weight:bold;text-decoration:none;">OAE CONNECTS</a>, we foster a vibrant community where students connect, share knowledge, and support each other. <a href="https://whatsapp.com/channel/0029VaenL69FCCoXrbpqm73T" target="_blank" style="color:#008000;font-weight:bold;text-decoration:none;">OAE MEDIA TV</a> brings fun to learning by sharing jokes, memes, tech content, and engaging stories, creating a friendly and interactive atmosphere.</p>
+      <p><a href="https://whatsapp.com/channel/0029VbALlqfHrDZmdFTtVO33" target="_blank" style="color:#008000;font-weight:bold;text-decoration:none;">OAE TECHTROOPS</a> is our tech-focused community for Full Stack, Cybersecurity, AI, Data Science, and Cloud Computing. It offers expert-led training, hands-on challenges, and resources to help students and tech enthusiasts grow their skills and careers.</p>
+      <p><a href="https://whatsapp.com/channel/0029VbALlqfHrDZmdFTtVO33" target="_blank" style="color:#008000;font-weight:bold;text-decoration:none;">OAE TECHTROOPS</a> is our tech-focused community for Full Stack, Cybersecurity, AI, Data Science, and Cloud Computing. It offers expert-led training, hands-on challenges, and resources to help students and tech enthusiasts grow their skills and careers.</p>
+      <p><strong>TECHTROOPS MISSION:</strong><br>
+      To empower learners and young professionals with practical tech skills, mentorship, and opportunities for innovation in Africa and beyond.</p>
+      <div style="margin:18px 0 0 0;padding:12px 16px;background:#e6ffe6;border-left:5px solid #008000;border-radius:6px;">
+        
+      </div>
+      <p>We are developing tech-driven educational tools like quiz arenas, performance dashboards, learning games, and content browsers, while exploring modern technologies such as AI, automation, and blockchain. Our mission is simple: to make education easier with technology and bring tech to the world.</p>
+      <p><strong>VISION:</strong><br>
+      To become a leading African brand in education, innovation, and youth empowerment — blending academic excellence with creativity, technology, and community spirit.</p>
+      <p><strong>MISSION:</strong><br>
+      To equip learners and young minds with the knowledge, tools, and confidence needed to excel academically, professionally, and personally.</p>
+      <p><strong>CORE VALUES:</strong><br>
+      Excellence • Innovation • Community • Integrity</p>
+    </div>
+  </div>
+
+
+  <!-- Back to Top Button -->
+  <button id="backToTop" style="position:fixed;bottom:30px;right:30px;z-index:999;background:#FF9800;color:#fff;border:none;border-radius:50%;width:48px;height:48px;box-shadow:0 2px 8px rgba(0,0,0,0.12);font-size:22px;cursor:pointer;display:none;transition:background 0.3s;">↑</button>
+
+  <div class="section-heading main-heading">
+    <h2>🌟 OAE Main Channels & Communities</h2>
+  </div>
+  <div class="school-box" style="background:#f3fff3;border-color:#008000;box-shadow:0 2px 8px rgba(0,128,0,0.07);">
+    <h3 style="color:#008000;">OAE MEDIA TV</h3>
+    <div class="note" style="background:#e6ffe6;border-left:5px solid #008000;color:#008000;">For fun, jokes, funny stories and entertainment.</div>
+    <div class="links">
+      <a href="https://whatsapp.com/channel/0029VaenL69FCCoXrbpqm73T" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box" style="background:#f3fff3;border-color:#008000;box-shadow:0 2px 8px rgba(0,128,0,0.07);">
+    <h3 style="color:#008000;">OAE CONNECTS</h3>
+    <div class="note" style="background:#e6ffe6;border-left:5px solid #008000;color:#008000;">Where all OAE past, present and incoming students join.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029VaiCEq1AjPXRzzB34H25" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box" style="background:#f3fff3;border-color:#008000;box-shadow:0 2px 8px rgba(0,128,0,0.07);">
+    <h3 style="color:#008000;">OAE || ADMISSION HUB</h3>
+    <div class="note" style="background:#e6ffe6;border-left:5px solid #008000;color:#008000;">Admission updates and support for university aspirants.</div>
+    <div class="links">
+      <a href="https://t.me/OAE_UNI_UPDATES" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029VakYvdGBPzja0pE8OC3G" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box" style="background:#f3fff3;border-color:#008000;box-shadow:0 2px 8px rgba(0,128,0,0.07);">
+    <h3 style="color:#008000;">OAE || TECHTROOPS</h3>
+    <div class="note" style="background:#e6ffe6;border-left:5px solid #008000;color:#008000;">Tech community for Full Stack, Cybersecurity, Hacker, AI, Data Science & Cloud Computing. Expert-led training, hands-on challenges & resources.</div>
+    <div class="links">
+      <a href="https://t.me/OAETECHTROOPS" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029VbALlqfHrDZmdFTtVO33" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box" style="background:#f3fff3;border-color:#008000;box-shadow:0 2px 8px rgba(0,128,0,0.07);">
+    <h3 style="color:#008000;">OAE JAMBITES CHANNEL</h3>
+    <div class="note" style="background:#e6ffe6;border-left:5px solid #008000;color:#008000;">For new university aspirants and freshers.</div>
+    <div class="links">
+      <a href="https://whatsapp.com/channel/0029Vb66tZEGpLHVywfPle20" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+
+  <div class="section-heading school-heading">
+    <h2>🎓 School Groups & Channels</h2>
+  </div>
+
+  <div class="note" style="margin-bottom:20px;background:#e6ffe6;border-left:5px solid #008000;color:#008000;">
+    ⚠️ <strong>Note:</strong> Join <strong>only</strong> the group/channel of the school you're aspiring to. This helps keep discussions focused and helpful.
+  </div>
+
+  <!-- BEGIN SCHOOL BLOCKS -->
+  <div class="school-box">
+    <h3>🎓 Lagos State University (LASU)</h3>
+    <div class="school-detail">A leading state university in Nigeria, known for its diverse academic programs and vibrant student life.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/EcuCn6sgifV5BEhhd1Nyku" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029VbAryZU60eBZibqNYu0N" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 University of Ibadan (UI)</h3>
+    <div class="school-detail">Nigeria's oldest university, renowned for its research, academic excellence, and beautiful campus.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/FQg7YilT27m8IQrnUADhjS" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029VbApRRo30LKJcV3UNj2M" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Obafemi Awolowo University (OAU)</h3>
+    <div class="school-detail">Famous for its strong academic programs and iconic architecture, located in Ile-Ife, Osun State.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/FKQzHhvluam9qRssLpkGKf" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029VbAfy2mIN9iuQOBiZ41T" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 University of Lagos (UNILAG)</h3>
+    <div class="school-detail">Located in the heart of Lagos, UNILAG is a top choice for students seeking quality education and city life.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/FjkExNrA2hKDTsSduXujCx" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029VbA5AY4I1rcbqvQE0J31" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Olabisi Onabanjo University (OOU)</h3>
+    <div class="school-detail">A dynamic university in Ogun State, offering a wide range of programs and a supportive learning environment.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/JVnp9nPXYJUCG0JOqcfXMb" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029VbB4tDhCXC3BIaNKy635" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 University of Ilorin (UNILORIN)</h3>
+    <div class="school-detail">A top federal university in Kwara State, known for its academic stability and excellence.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/FrOaYTK8iQOHpMJk4wOtLM" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029Vb5ZFhcB4hdZCwDj0U2N" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 University of Port Harcourt (UNIPORT)</h3>
+    <div class="school-detail">Located in Rivers State, UNIPORT is famous for its strong science and engineering faculties.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/FoCAzZNdrca00f4xwuMMI2" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029Vb5obYTK0IBf0q5al437" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 University of Benin (UNIBEN)</h3>
+    <div class="school-detail">A leading university in Edo State, known for its diverse student body and academic achievements.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/DIJSSjzvecF0gKzfZiwh9B" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029VbATZs28F2pDTQWAqY1x" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Delta State University (DELSU)</h3>
+    <div class="school-detail">A prominent state university in Delta State, offering a wide range of programs.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/BIOpvVYwqx84omu2hqJLQC" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029VbAr06N4NVih70Bzm30P" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Federal University Oye-Ekiti (FUOYE)</h3>
+    <div class="school-detail">A fast-growing federal university in Ekiti State, known for innovation and student engagement.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/BoWe7nsEUSVLJD6tBpa6ec" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029VbAXFbVHgZWhJlxbzz3l" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Osun State University (UNIOSUN)</h3>
+    <div class="school-detail">A multi-campus university in Osun State, focused on quality education and research.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/FJftPCvHjqtC0nDcVZ1vfM" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029Vb5C7EE8vd1WGYRQfG1b" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Federal University of Technology Akure (FUTA)</h3>
+    <div class="school-detail">A top university for technology and engineering studies in Nigeria.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/EkwlE9x0mMeIQg8wGL7nR5" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029Vb5k1dr3wtbAOzzfNq45" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Federal University of Health Sciences, Ila-Orangun (FUHSI)</h3>
+    <div class="school-detail">Specialized in health sciences, located in Osun State.</div>
+    <div class="links">
+      <a href="https://chat.whatsapp.com/CARFpQuktFnHduAUNVxc0S" target="_blank">🔗 Join WhatsApp Group</a>
+      <a href="https://whatsapp.com/channel/0029Vb6M5RMC1FuGCQfnPf1p" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 David Umahi University of Medical Sciences (DOU)</h3>
+    <div class="school-detail">A new medical university in Ebonyi State, focused on health and medical sciences.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029VbBg7qS3AzNTTwG6L80d" target="_blank">📢 Join Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Ahmadu Bello University (ABU ZARIA)</h3>
+    <div class="school-detail">One of Nigeria's largest universities, located in Zaria, Kaduna State.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029Vb6RzZXJuyAKUH0YUC3k" target="_blank">📢 Join Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 University of Nigeria, Nsukka (UNN)</h3>
+    <div class="school-detail">A prestigious federal university in Enugu State, known for its academic excellence.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029VbAkzM9A2pL8tUzNV72m" target="_blank">📢 Join Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Nnamdi Azikiwe University (UNIZIK)</h3>
+    <div class="school-detail">Located in Awka, Anambra State, UNIZIK is known for its vibrant campus and diverse programs.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029VbAOV3SCnA7o1ccft639" target="_blank">📢 Join Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Kwara State University (KWASU)</h3>
+    <div class="school-detail">A modern state university in Kwara, focused on entrepreneurship and innovation.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029Vb5WeS9BPzjafElsFW0e" target="_blank">📢 Join Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 David Umahi Federal University of Health Sciences (DUFUHS)</h3>
+    <div class="school-detail">A specialized university in Ebonyi State, dedicated to health sciences and research.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029VbAzsc8GehEQFhVLIJ3x" target="_blank">📢 Join Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 University of Ilesa (UNILESA)</h3>
+    <div class="school-detail">A new university in Osun State, aiming to provide quality education and community impact.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029VbAqSfXHwXbJU1gYbM2r" target="_blank">📢 Join Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Lagos State University of Education (LASUED)</h3>
+    <div class="school-detail">A state university in Lagos, focused on teacher education and professional development.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029Vb65Mdt1dAwB7K3AB31W" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Air Force Institute of Technology (AFIT)</h3>
+    <div class="school-detail">A federal institution in Kaduna, specializing in aerospace and engineering studies.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029VbB35VN5q08UbtsW1F0l" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Rivers State University (RSU)</h3>
+    <div class="school-detail">A major university in Rivers State, known for its engineering and science programs.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029VbBGQzVKbYMUqZAJPb1z" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+  <div class="school-box">
+    <h3>🎓 Adeleke University, Ede</h3>
+    <div class="school-detail">A private university in Osun State, offering a range of programs in a serene environment.</div>
+    <div class="links">
+      <a href="https://t.me/OAECONNECT" target="_blank">🔗 Join Telegram Group</a>
+      <a href="https://whatsapp.com/channel/0029VbB5LCt1Hsq3fBzuCE2l" target="_blank">📢 Join WhatsApp Channel</a>
+    </div>
+  </div>
+</body>
+
+<footer class="oae-footer">
+  <div class="footer-container">
+    <div class="footer-section">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="#Support">Support</a></li>
+        <li><a href="#AboutUs">AboutUs</a></li>
+        <li><a href="#TermsOfService">TermsOfService</a></li>
+        <li><a href="#PrivacyPolicy">PrivacyPolicy</a></li>
+        <li><a href="#FAQ">FAQ</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Resources</h4>
+      <ul>
+        <li><a href="https://t.me/OAECONNECT" target="_blank">Study Materials</a></li>
+        <li><a href="https://t.me/OAECONNECT" target="_blank">Past Questions</a></li>
+        <li><a href="https://t.me/OAECONNECT" target="_blank">Online Classes</a></li>
+        <li><a href="https://t.me/OAECONNECT" target="_blank">Books for JAMB/WAEC</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h4>Follow Us</h4>
+      <ul class="footer-socials">
+        <li><a href="https://facebook.com/oaeofficial123" target="_blank"><span>Facebook</span></a></li>
+        <li><a href="https://twitter.com/oaeofficial123" target="_blank"><span>Twitter</span></a></li>
+        <li><a href="https://instagram.com/oaeofficial123" target="_blank"><span>Instagram</span></a></li>
+        <li><a href="https://youtube.com/@oaeofficial123" target="_blank"><span>YouTube</span></a></li>
+        <li><a href="mailto:oaeofficial123@gmail.com" target="_blank"><span>Gmail</span></a></li>
+        <li><a href="https://whatsapp.com/channel/0029VaiCEq1AjPXRzzB34H25" target="_blank"><span>WhatsApp</span></a></li>
+        <li><a href="https://t.me/OAECONNECT" target="_blank"><span>Telegram</span></a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    &copy; 2025 OAE Official. All rights reserved.
+  </div>
+</footer>
+
+<style>
+  .oae-footer {
+    background: #008000;
+    color: #fff;
+    padding: 40px 0 0 0;
+    margin-top: 40px;
+    font-size: 15px;
+    box-shadow: 0 -2px 12px rgba(0,128,0,0.08);
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    transform: translateX(-50%);
+  }
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .footer-section {
+    flex: 1 1 220px;
+    min-width: 180px;
+    margin-bottom: 30px;
+  }
+  .footer-section h4 {
+    font-size: 17px;
+    margin-bottom: 15px;
+    color: #FF4500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-bottom: 2px solid #FF4500;
+    padding-bottom: 7px;
+  }
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .footer-section ul li {
+    margin-bottom: 10px;
+  }
+  .footer-section ul li a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+    font-weight: 500;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  }
+  .footer-section ul li a:hover {
+    color: #FF9800;
+    text-shadow: 0 2px 8px rgba(255,152,0,0.18);
+  }
+  .footer-socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  .footer-socials li {
+    margin-bottom: 0;
+  }
+  .footer-socials a span {
+    display: inline-block;
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.10);
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 600;
+    transition: background 0.3s, color 0.3s;
+  }
+  .footer-socials a:hover span {
+    background: #FF9800;
+    color: #fff;
+  }
+  .footer-contact {
+    margin-top: 18px;
+    font-size: 14px;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .footer-contact a {
+    color: #fff;
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  .footer-contact a:hover {
+    color: #FF9800;
+  }
+  .footer-bottom {
+    text-align: center;
+    padding: 18px 0 10px 0;
+    background: rgba(0,0,0,0.08);
+    color: #fff;
+    font-size: 14px;
+    letter-spacing: 1px;
+    border-top: 1px solid #fff;
+    margin-top: 10px;
+  }
+  @media (max-width: 700px) {
+    .footer-container {
+      flex-direction: column;
+      gap: 0;
+      padding: 0 8vw;
+    }
+    .footer-section {
+      margin-bottom: 18px;
+    }
+    .footer-section h4 {
+      font-size: 16px;
+      padding-bottom: 5px;
+    }
+    .footer-bottom {
+      font-size: 13px;
+      padding: 12px 0 8px 0;
+    }
+  }
+</style>
+</html>
